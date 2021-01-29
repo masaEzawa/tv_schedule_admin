@@ -1,0 +1,15 @@
+---------------------------------
+-- 期間内の日付の中で、
+-- 指定の曜日の一覧を取得するSQL
+---------------------------------
+
+create temporary table lovers
+select * from (
+    select 
+        *
+    from
+        tb_tv_reserve
+    where
+        onair_start_date
+) X
+;

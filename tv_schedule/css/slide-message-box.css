@@ -1,0 +1,32 @@
+@CHARSET "UTF-8";
+
+.infoBox, errorBox {
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding: 1em 0;
+	width: 100%;
+	cursor: pointer;
+	font-size: 128.6%;
+	font-weight: bold;
+	height: 80px;
+	line-height: 40px;
+	border-bottom: 1px solid #f6f6f6;
+	-webkit-box-shadow: 0 0 12px rgba(0,0,0,.3);
+	z-index: 99999;
+}
+.infoBox {
+	color: #ffffff;
+	background: #2e8b57;
+	text-align: center;
+	text-decoration: none;
+	opacity: .95;
+}
+
+.errorBox {
+	color: #ffffff;
+	background-color: #ff0000;
+	text-align: center;
+	text-decoration: none;
+	opacity: .95;
+}
