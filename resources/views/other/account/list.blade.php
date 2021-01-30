@@ -78,15 +78,15 @@
 									{{-- 操作 --}}
 									<td class="list_td">
 										{{-- 詳細 --}}
-										<a href="{{ action( $displayObj->ctl . '@getDetail', ['id' => $value->id] ) }}" title="詳細">
+										<a href="{{  route( 'account.detail', ['id' => $value->id] ) }}" title="詳細">
 											<i class="fui-search"></i>
 										</a>
 										{{-- 編集 --}}
-										<a href="{{ action( $displayObj->ctl . '@getEdit', ['id' => $value->id] ) }}" title="編集">
+										<a href="{{  route( 'account.edit', ['id' => $value->id] ) }}" title="編集">
 											<i class="fui-new"></i>
 										</a>
 										{{-- 削除 --}}
-										<a href="{{ action( $displayObj->ctl . '@getDelete', ['id' => $value->id] ) }}" onclick="return confirm('本当に削除してよろしいでしょうか？');" title="削除">
+										<a href="{{  route( 'account.delete', ['id' => $value->id] ) }}" onclick="return confirm('本当に削除してよろしいでしょうか？');" title="削除">
 											<i class="fui-trash"></i>
 										</a>
 										

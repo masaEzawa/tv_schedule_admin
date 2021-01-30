@@ -3,7 +3,7 @@
 namespace App\Events;
 
 use Illuminate\Queue\SerializesModels;
-use App\Models\UserAccount;
+use App\Models\User;
 use App\Events\Event;
 
 /**
@@ -21,7 +21,7 @@ class LoginedEvent extends Event
      *
      * @return void
      */
-    public function __construct( UserAccount $user )
+    public function __construct( User $user )
     {
         $this->user = $user;
     }

@@ -3,9 +3,9 @@
 namespace App\Commands\Other\Account;
 
 use App\Lib\Util\DateUtil;
-use App\Models\UserAccount;
+use App\Models\User;
 use Illuminate\Console\Command;
-use App\Http\Requests\UserAccountRequest;
+use App\Http\Requests\UserRequest;
 
 /**
  * 担当者を新規作成するコマンド
@@ -16,9 +16,9 @@ class CreateCommand extends Command{
     
     /**
      * コンストラクタ
-     * @param UserAccountRequest $requestObj [description]
+     * @param UserRequest $requestObj [description]
      */
-    public function __construct( UserAccountRequest $requestObj ){
+    public function __construct( UserRequest $requestObj ){
         $this->requestObj = $requestObj;
     }
 
@@ -31,7 +31,7 @@ class CreateCommand extends Command{
         $setValues = $this->requestObj->all();
         
         // 登録されたデータを持つモデルオブジェクトを取得
-        $userMObj = UserAccount::create( $setValues );
+        $userMObj = User::create( $setValues );
         
         return $userMObj;
     }

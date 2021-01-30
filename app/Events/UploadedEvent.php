@@ -4,7 +4,7 @@ namespace App\Events;
 
 use Illuminate\Queue\SerializesModels;
 use App\Lib\Csv\CsvImportResult;
-use App\Models\UserAccount;
+use App\Models\User;
 use App\Events\Event;
 
 /**
@@ -24,7 +24,7 @@ class UploadedEvent extends Event
      * UploadedHandlerが本体
      * @return void
      */
-    public function __construct( UserAccount $user, CsvImportResult $result, $csvType )
+    public function __construct( User $user, CsvImportResult $result, $csvType )
     {
         $this->user = $user;
         $this->result = $result;

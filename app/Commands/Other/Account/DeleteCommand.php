@@ -3,7 +3,7 @@
 namespace App\Commands\Other\Account;
 
 use App\Lib\Util\DateUtil;
-use App\Models\UserAccount;
+use App\Models\User;
 use Illuminate\Console\Command;
 
 /**
@@ -28,7 +28,7 @@ class DeleteCommand extends Command{
      */
     public function handle(){
         // 指定したIDのモデルオブジェクトを取得
-        $userMObj = UserAccount::findOrFail( $this->id );
+        $userMObj = User::findOrFail( $this->id );
         
         // ソフトデリート
         $userMObj->delete();

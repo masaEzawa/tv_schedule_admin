@@ -8,10 +8,10 @@ use App\Commands\Other\Account\ListCommand;
 use App\Commands\Other\Account\CreateCommand;
 use App\Commands\Other\Account\UpdateCommand;
 use App\Commands\Other\Account\DeleteCommand;
-use App\Models\UserAccount;
-use App\Http\Requests\UserAccountRequest;
+use App\Models\User;
+use App\Http\Requests\UserRequest;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\tInitSearch;
+use App\Http\Controllers\tCommon;
 
 /**
  * アカウント画面用コントローラー
@@ -21,7 +21,7 @@ use App\Http\Controllers\tInitSearch;
  */
 class AccountController extends Controller{
     
-    use tInitSearch;
+    use tCommon;
     
     /**
      * コンストラクタ
@@ -49,7 +49,7 @@ class AccountController extends Controller{
         // 基本のテンプレート
         $this->displayObj->tpl = $this->displayObj->category . "." . $this->displayObj->page;
         // コントローラー名
-        $this->displayObj->ctl = "Other\AccountController";
+        $this->displayObj->ctl = "App\Http\Controllers\Other\AccountController";
     }
 
     #######################
@@ -106,7 +106,7 @@ class AccountController extends Controller{
             )
         )
         ->with( 'displayObj', $this->displayObj )
-        ->with( "sortUrl", action( $this->displayObj->ctl . '@getSort' ) )
+        ->with( "sortUrl", route( 'account.sort' ) )
         ->with( 'title', "アカウント リスト" );
     }
     
@@ -120,7 +120,7 @@ class AccountController extends Controller{
      */
     public function getCreate() {
         // アカウントモデルオブジェクトを取得
-        $userMObj = new UserAccount();
+        $userMObj = new User();
 
         return view(
             $this->displayObj->tpl . '.input',
@@ -136,10 +136,10 @@ class AccountController extends Controller{
 
     /**
      * 値の登録処理
-     * @param  UserAccountRequest $requestObj [description]
+     * @param  UserRequest $requestObj [description]
      * @return [type]                  [description]
      */
-    public function putCreate( UserAccountRequest $requestObj ) {
+    public function postCreate( UserRequest $requestObj ) {
         // 登録画面で入力された値を登録
         $this->dispatch(
             new CreateCommand( $requestObj )
@@ -159,7 +159,7 @@ class AccountController extends Controller{
      */
     public function getEdit( $id ){
         // アカウントモデルオブジェクトを取得
-        $userMObj = UserAccount::findOrFail( $id );
+        $userMObj = User::findOrFail( $id );
         
         return view(
             $this->displayObj->tpl . '.input',
@@ -176,10 +176,10 @@ class AccountController extends Controller{
     /**
      * 編集画面で入力された値を登録
      * @param  [type]      $id         [description]
-     * @param  UserAccountRequest $requestObj [description]
+     * @param  UserRequest $requestObj [description]
      * @return [type]                  [description]
      */
-    public function putEdit( $id, UserAccountRequest $requestObj ) {
+    public function postEdit( $id, UserRequest $requestObj ) {
         // 編集画面で入力された値を更新
         $this->dispatch(
             new UpdateCommand( $id, $requestObj )
@@ -199,7 +199,7 @@ class AccountController extends Controller{
      */
     public function getDetail( $id ){
         // アカウントモデルオブジェクトを取得
-        $userMObj = UserAccount::findOrFail( $id );
+        $userMObj = User::findOrFail( $id );
         
         return view(
             $this->displayObj->tpl . '.detail',

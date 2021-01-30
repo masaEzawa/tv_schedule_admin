@@ -24,7 +24,7 @@ class LoginRequest extends FormRequest {
     public function rules()
     {
         return [
-            'id' => 'required',
+            'user_login_id' => 'required',
             'password' => 'required'
         ];
     }
@@ -33,7 +33,7 @@ class LoginRequest extends FormRequest {
     {
         // エントリーフォームの入力値確認
         $messages = [
-            'id.required' => 'ログインIDを入力してください。',
+            'user_login_id.required' => 'ログインIDを入力してください。',
             'password.required' => 'パスコードを入力してください。'
         ];
         

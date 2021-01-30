@@ -23,7 +23,7 @@
 							<label>ユーザーID</label>
 						</div>
 						<div class="col col-sm-9">
-							<input type="text" name="id" value="{{ old('id') }}" class="form-control login-field" placeholder="" id="login-name">
+							<input type="text" name="user_login_id" value="{{ old('user_login_id') }}" class="form-control login-field" placeholder="" id="login-name">
 						</div>
 					</div>
 				</div>

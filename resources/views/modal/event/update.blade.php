@@ -98,7 +98,7 @@
 
 				
 
-				{!! Form::open( ['id' => 'modal-edit-form', 'method' => 'POST', 'action' => $displayObj->ctl . '@postEventEdit'] ) !!}
+				{!! Form::open( ['id' => 'modal-edit-form', 'method' => 'POST', 'route' => 'top.eventEdit'] ) !!}
 
 					{{-- 対象月を保持しておく --}}
 					{!! Form::hidden( 'target', null ) !!}

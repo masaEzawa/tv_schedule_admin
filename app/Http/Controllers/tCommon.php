@@ -6,37 +6,10 @@ use App\Lib\Util\DateUtil;
 use App\Original\Codes\RowNumCodes;
 use App\Original\Util\SessionUtil;
 use App\Http\Requests\SearchRequest;
-use App\Models\UserAccount;
+use App\Models\User;
 use Request;
 
-/**
- * 検索画面用初期化処理トレイト
- * 検索処理の関数(検索・ソート)
- *
- * 【概要】
- * getListParamsやgetSortParamsを呼ぶと共通となっている
- * 初期化処理を行います。
- * またextendSearchParamsやextendSortParamsをオーバーライドすることで
- * 画面内固有の初期化処理を行うことができます。
- *
- * 【使用方法】
- * useしたクラス内でextendSearchParamsやextendSortParamsを実装してください。
- *
- * 【注意事項】
- * extendSearchParamsでは追加されていきますが、
- * extendSortParamsは名前通り上書きます。
- *
- * 【例】
- *  public function extendSearchParams() {
- *      return ['account_level' => 3, 'base_code' => '01'];
- *  }
- *
- *  public function extendSortParams() {
- *      return ['account_level' => 'asc'];
- *  }
- *
- */
-trait tInitSearch {
+trait tCommon {
 
     protected $search;
     protected $sort;

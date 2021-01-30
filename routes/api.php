@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,17 +14,6 @@ use Illuminate\Http\Request;
 |
 */
 
-
-/*
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
-});
-*/
-
-// ブログ公開画面のコントローラー
-Route::group( ['prefix' => 'event'], function() {
-
-    // ブログ公開画面のコントローラ
-    Route::get( 'search',      'Api\Event\EventController@getList' ); // 一覧表示
-    Route::get( 'sort',        'Api\Event\EventController@getSort' ); // 一覧表示
 });

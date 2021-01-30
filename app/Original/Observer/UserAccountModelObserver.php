@@ -11,7 +11,7 @@ use App\Original\Observer\ModelsObserver;
  * @author 江澤
  *
  */
-class UserAccountModelObserver extends ModelsObserver {
+class UserModelObserver extends ModelsObserver {
 
     use tModelObserver;
 

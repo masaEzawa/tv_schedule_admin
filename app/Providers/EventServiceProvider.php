@@ -2,16 +2,10 @@
 
 namespace App\Providers;
 
-use App\Models\UserAccount;
-// TV番組
-use App\Models\Tv\TvReserve;
-
-// オブサーバー
-use App\Original\Observer\UserAccountModelObserver;
-use App\Original\Observer\ModelsObserver;
-
-use Illuminate\Support\Facades\Event;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -21,8 +15,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\SomeEvent' => [
-            'App\Listeners\EventListener',
+        Registered::class => [
+            SendEmailVerificationNotification::class,
         ],
     ];
 
@@ -33,12 +27,6 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        parent::boot();
-
-        // ユーザーアカウント用オブザーバー
-        UserAccount::observe( new UserAccountModelObserver() );
-
-        // TV番組
-        TvReserve::observe( new ModelsObserver() );
+        //
     }
 }

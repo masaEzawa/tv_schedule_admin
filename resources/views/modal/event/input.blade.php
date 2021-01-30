@@ -92,7 +92,7 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 
-				{!! Form::open( ['id' => 'modal-form', 'method' => 'POST', 'action' => $displayObj->ctl . '@postEventCreate'] ) !!}
+				{!! Form::open( ['id' => 'modal-form', 'method' => 'POST', 'route' => 'top.eventCreate'] ) !!}
 
 					{{-- 対象月を保持しておく --}}
 					{!! Form::hidden( 'target', $target ) !!}

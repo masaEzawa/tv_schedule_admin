@@ -3,9 +3,9 @@
 namespace App\Commands\Other\Account;
 
 use App\Lib\Util\DateUtil;
-use App\Models\UserAccount;
+use App\Models\User;
 use Illuminate\Console\Command;
-use App\Http\Requests\UserAccountRequest;
+use App\Http\Requests\UserRequest;
 
 /**
  * 担当者を更新するコマンド
@@ -17,10 +17,10 @@ class UpdateCommand extends Command{
     /**
      * コンストラクタ
      * @param [type]      $id         [description]
-     * @param UserAccountRequest $requestObj [description]
+     * @param UserRequest $requestObj [description]
      * @param [type]      $file_name  [description]
      */
-    public function __construct( $id, UserAccountRequest $requestObj ){
+    public function __construct( $id, UserRequest $requestObj ){
         $this->id = $id;
         $this->requestObj = $requestObj;
     }
@@ -31,7 +31,7 @@ class UpdateCommand extends Command{
      */
     public function handle(){
         // 指定したIDのモデルオブジェクトを取得
-        $userMObj = UserAccount::findOrFail( $this->id );
+        $userMObj = User::findOrFail( $this->id );
         
         // 更新する値の配列を取得
         $setValues = $this->requestObj->all();

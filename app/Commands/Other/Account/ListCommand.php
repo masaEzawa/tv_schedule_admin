@@ -2,7 +2,7 @@
 
 namespace App\Commands\Other\Account;
 
-use App\Models\UserAccount;
+use App\Models\User;
 use Illuminate\Console\Command;
 
 /**
@@ -52,7 +52,7 @@ class ListCommand extends Command{
         $requestObj = $this->requestObj;
            
         // 検索条件を指定
-        $builderObj = UserAccount::whereRequest( $this->requestObj );
+        $builderObj = User::whereRequest( $this->requestObj );
         
         // 並び替えの処理
         $builderObj = $builderObj->orderBys( $this->sort['sort'] );

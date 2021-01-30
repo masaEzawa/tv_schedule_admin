@@ -10,7 +10,7 @@ use App\Http\Requests\SearchRequest;
  * @author 江澤
  *
  */
-class UserAccountRequest extends SearchRequest {
+class UserRequest extends SearchRequest {
 
     /**
      * Determine if the user is authorized to make this request.

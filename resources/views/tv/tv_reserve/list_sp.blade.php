@@ -148,13 +148,13 @@
                                         <td class="list_td" colspan="2">
                                             <div class="row">
                                                 <div class="col-sm-6 col-xs-6">
-                                                    <a href="{{ action( $displayObj->ctl . '@getDetail', ['id' => $value->id] ) }}" class="btn btn-info btn-block btn-embossed" title="詳細">
+                                                    <a href="{{ route( 'tv_reserve.detail', ['id' => $value->id] ) }}" class="btn btn-info btn-block btn-embossed" title="詳細">
                                                         <i class="fa fa-mail-reply"></i> 詳細
                                                     </a>
                                                 </div>
 
                                                 <div class="col-sm-6 col-xs-6">
-                                                    <a href="{{ action( $displayObj->ctl . '@getEdit', ['id' => $value->id] ) }}" class="btn btn-success btn-block btn-embossed" title="実績入力">
+                                                    <a href="{{ route( 'tv_reserve.edit', ['id' => $value->id] ) }}" class="btn btn-success btn-block btn-embossed" title="実績入力">
                                                         <i class="fa fa-mail-reply"></i> 編集
                                                     </a>
                                                 </div>

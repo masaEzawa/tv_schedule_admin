@@ -33,7 +33,7 @@ class AbstractModel extends Model {
      * 更新者を動的にバインド
      */
     public function updator() {
-        return $this->hasOne( 'App\Models\UserAccount', 'id', 'updated_by' );
+        return $this->hasOne( 'App\Models\User', 'id', 'updated_by' );
     }
 
     ###########################

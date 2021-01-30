@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Events\LoginedEvent;
 use App\Http\Controllers\Controller;
 use App\Original\Util\SessionUtil;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Account\Account;
 use App\Http\Requests\LoginRequest;
@@ -31,7 +32,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = 'top/';
+    protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.
@@ -40,11 +41,16 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest', ['except' => 'getLogout']);
+        $this->middleware('guest')->except('getLogout');
+    }
+
+    public function username()
+    {
+        return 'user_login_id';
     }
 
     public function postLogin( LoginRequest $request ){
-        if (Auth::attempt(['user_login_id' => $request->id, 'password' => $request->password])) {
+        if (Auth::attempt(['user_login_id' => $request->user_login_id, 'password' => $request->password])) {
             Event::dispatch( new LoginedEvent( Auth::user() ) );
             $user = Auth::user();
             

@@ -8,7 +8,7 @@ use App\Commands\Event\ListCommand;
 use App\Http\Requests\SearchRequest;
 use App\Http\Requests\Event\EventModalRequest;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\tInitSearch;
+use App\Http\Controllers\tCommon;
 use App\Models\Event\Event;
 use DB;
 
@@ -20,7 +20,7 @@ use DB;
  */
 class TopController extends Controller{
     
-    use tInitSearch;
+    use tCommon;
 
     /**
      * コンストラクタ
@@ -51,7 +51,7 @@ class TopController extends Controller{
         // 基本のテンプレート
         $this->displayObj->tpl = $this->displayObj->category . "." . $this->displayObj->page;
         // コントローラー名
-        $this->displayObj->ctl = "Top\TopController";
+        $this->displayObj->ctl = "App\Http\Controllers\Top\TopController";
     }
 
     #######################
@@ -198,7 +198,7 @@ class TopController extends Controller{
         }
         
         // 一覧画面にリダイレクト
-        return redirect( action( $this->displayObj->ctl . '@getList' ) );
+        return redirect( action( $this->displayObj->ctl, '@getList' ) );
     }
 
     /**
@@ -283,7 +283,7 @@ class TopController extends Controller{
         }
         
         // 一覧画面にリダイレクト
-        return redirect( action( $this->displayObj->ctl . '@getList' ) );
+        return redirect( action( $this->displayObj->ctl, '@getList' ) );
     }
 
 }

@@ -2,23 +2,14 @@
 
 namespace App\Models;
 
-use App\Models\Role;
-use Illuminate\Auth\Authenticatable;
-use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use DB;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-/**
- * 担当者モデル
- *
- * @author 江澤
- *
- */
-class UserAccount extends AbstractModel implements AuthenticatableContract, CanResetPasswordContract {
-
-    use Authenticatable, CanResetPassword, SoftDeletes;
+class User extends Authenticatable 
+{
+    use HasFactory, Notifiable;
 
     // テーブル名
     protected $table = 'tb_user_account';
@@ -38,14 +29,26 @@ class UserAccount extends AbstractModel implements AuthenticatableContract, CanR
         'created_by',
         'updated_by'
     ];
-    
+
     /**
-     * The attributes excluded from the model's JSON form.
+     * The attributes that should be hidden for arrays.
      *
      * @var array
      */
-    protected $hidden = ['password', 'remember_token'];
-    
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    // protected $casts = [
+    //     'email_verified_at' => 'datetime',
+    // ];
+
     ######################
     ## other
     ######################
@@ -64,8 +67,8 @@ class UserAccount extends AbstractModel implements AuthenticatableContract, CanR
      */
     public static function options() {
         // 拠点長は表示しない
-        //return UserAccount::whereNotIn( 'account_level', [6] )
-        return UserAccount::orderBys( ['id' => 'asc'] )
+        //return User::whereNotIn( 'account_level', [6] )
+        return User::orderBys( ['id' => 'asc'] )
             ->lists( 'user_name', 'user_id' );
     }
         
@@ -76,7 +79,7 @@ class UserAccount extends AbstractModel implements AuthenticatableContract, CanR
      * @return boolean
      */
     public function unique( $value ) {
-        $count = UserAccount::where( 'user_id', $value )
+        $count = User::where( 'user_id', $value )
                             ->whereNull( $this->getTableName().'.'.$this->getDeletedAtColumn() )
                             ->count();
 
@@ -90,7 +93,7 @@ class UserAccount extends AbstractModel implements AuthenticatableContract, CanR
      * @return boolean
      */
     public function unique_login_id( $value ) {
-        $count = UserAccount::where( 'user_login_id', $value )
+        $count = User::where( 'user_login_id', $value )
                             ->whereNull( $this->getTableName().'.'.$this->getDeletedAtColumn() )
                             ->count();
 
@@ -114,6 +117,21 @@ class UserAccount extends AbstractModel implements AuthenticatableContract, CanR
     ###########################
     ## User List Commands
     ###########################
+
+    /**
+     * 複数のorder byを指定するメソッド
+     * @param  [type] $query  [description]
+     * @param  [type] $orders [description]
+     * @return [type]         [description]
+     */
+    public static function scopeOrderBys( $query, $orders ) {
+        if( !empty( $orders ) ) {
+            foreach ( $orders as $key => $value ) {
+                $query->orderBy( \DB::raw($key), $value );
+            }
+        }
+        return $query;
+    }
     
     /**
      * 検索条件を指定するメソッド
@@ -123,9 +141,8 @@ class UserAccount extends AbstractModel implements AuthenticatableContract, CanR
      */
     public function scopeWhereRequest( $query, $requestObj ){
         // 検索条件を指定
-        $query = $query->includeDeleted( "1" ); // 削除データを含めるか
+        $query = $query;
         
         return $query;
     }
-    
 }

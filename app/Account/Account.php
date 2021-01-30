@@ -4,7 +4,7 @@ namespace App\Account;
 
 use App\Lib\Util\DateUtil;
 use App\Account\Authority;
-use App\Models\UserAccount;
+use App\Models\User;
 
 /**
  * ログイン時の担当者クラス
@@ -21,10 +21,10 @@ class Account{
     /**
      * コンストラクタ
      *
-     * @param UserAccount $account
+     * @param User $account
      * @param Authority $authority
      */
-    public function __construct( UserAccount $account ){
+    public function __construct( User $account ){
         $this->account = $account;
         $this->role = $account->role;
         $this->base = $account->base;

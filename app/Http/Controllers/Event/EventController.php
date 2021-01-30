@@ -12,7 +12,7 @@ use App\Models\Event\Event;
 use App\Http\Requests\SearchRequest;
 use App\Http\Requests\Event\EventRequest;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\tInitSearch;
+use App\Http\Controllers\tCommon;
 
 /**
  * イベント画面用コントローラー
@@ -22,7 +22,7 @@ use App\Http\Controllers\tInitSearch;
  */
 class EventController extends Controller{
     
-    use tInitSearch;
+    use tCommon;
     
     /**
      * コンストラクタ
@@ -37,7 +37,7 @@ class EventController extends Controller{
         // 基本のテンプレート
         $this->displayObj->tpl = $this->displayObj->category . "." . $this->displayObj->page;
         // コントローラー名
-        $this->displayObj->ctl = "Event\EventController";
+        $this->displayObj->ctl = "App\Http\Controllers\Event\EventController";
     }
 
     #######################
@@ -128,7 +128,7 @@ class EventController extends Controller{
             )
         )
         ->with( 'displayObj', $this->displayObj )
-        ->with( "sortUrl", action( $this->displayObj->ctl . '@getSort' ) )
+        ->with( "sortUrl", route( 'event.sort' ) )
         ->with( 'title', "イベント" );
     }
     
@@ -176,7 +176,7 @@ class EventController extends Controller{
      * @param  EventRequest $requestObj [description]
      * @return [type]                  [description]
      */
-    public function putCreate( EventRequest $requestObj ) {
+    public function postCreate( EventRequest $requestObj ) {
         
         //$requestObj->flash();
         // 登録画面で入力された値を登録
@@ -233,7 +233,7 @@ class EventController extends Controller{
      * @param  EventRequest $requestObj [description]
      * @return [type]                  [description]
      */
-    public function putEdit( $id, EventRequest $requestObj ) {
+    public function postEdit( $id, EventRequest $requestObj ) {
         // 編集画面で入力された値を更新
         $this->dispatch(
             new UpdateCommand( $id, $requestObj )

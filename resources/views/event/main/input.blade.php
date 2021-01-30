@@ -22,14 +22,14 @@
     {{-- 編集の時の処理 --}}
     {!! Form::model(
         $targetMObj,
-        ['id'=> 'regEditForm', 'method' => 'PUT', 'url' => action( $displayObj->ctl . '@putEdit', ['id' => $targetMObj->id] ), 'enctype' => 'multipart/form-data']
+        ['id'=> 'regEditForm', 'method' => 'POST', 'url' => route( 'event.edit', ['id' => $targetMObj->id] ), 'enctype' => 'multipart/form-data']
     ) !!}
 
 @else
     {{-- 確認画面に遷移 --}}
     {!! Form::model(
         $targetMObj,
-        ['id'=> 'regEditForm', 'method' => 'PUT', 'url' => action( $displayObj->ctl . '@putCreate' ), 'enctype' => 'multipart/form-data']
+        ['id'=> 'regEditForm', 'method' => 'POST', 'url' => route( 'event.create' ), 'enctype' => 'multipart/form-data']
     ) !!}
 
 @endif

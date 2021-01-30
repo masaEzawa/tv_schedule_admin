@@ -11,7 +11,7 @@ use App\Commands\Tv\TvReserve\DeleteCommand;
 use App\Models\Tv\TvReserve;
 use App\Http\Requests\TvReserve\TvReserveRequest;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\tInitSearch;
+use App\Http\Controllers\tCommon;
 
 /**
  * TV番組画面用コントローラー
@@ -21,7 +21,7 @@ use App\Http\Controllers\tInitSearch;
  */
 class MainController extends Controller{
     
-    use tInitSearch;
+    use tCommon;
     
     /**
      * コンストラクタ
@@ -53,7 +53,7 @@ class MainController extends Controller{
         
        
         // コントローラー名
-        $this->displayObj->ctl = "Tv\TvReserve\MainController";
+        $this->displayObj->ctl = MainController::class;
     }
 
     #######################
@@ -140,7 +140,7 @@ class MainController extends Controller{
             )
         )
         ->with( 'displayObj', $this->displayObj )
-        ->with( "sortUrl", action( $this->displayObj->ctl . '@getSort' ) )
+        ->with( "sortUrl", route( 'tv_reserve.sort' ) )
         ->with( 'title', "TV番組" );
     }
     
@@ -173,7 +173,7 @@ class MainController extends Controller{
      * @param  TvReserveRequest $requestObj [description]
      * @return [type]                  [description]
      */
-    public function putCreate( TvReserveRequest $requestObj ) {
+    public function postCreate( TvReserveRequest $requestObj ) {
 
         // 登録画面で入力された値を登録
         $this->dispatch(
@@ -214,7 +214,7 @@ class MainController extends Controller{
      * @param  TvReserveRequest $requestObj [description]
      * @return [type]                  [description]
      */
-    public function putEdit( $id, TvReserveRequest $requestObj ) {
+    public function postEdit( $id, TvReserveRequest $requestObj ) {
         // 編集画面で入力された値を更新
         $this->dispatch(
             new UpdateCommand( $id, $requestObj )
