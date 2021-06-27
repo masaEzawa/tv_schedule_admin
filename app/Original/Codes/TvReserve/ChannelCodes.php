@@ -20,6 +20,7 @@ class ChannelCodes extends Code {
         '6' => '6: TBS',
         '7' => '7: テレビ東京',
         '8' => '8: フジテレビ',
+        '2' => '2: NHK Eテレ',
     ];
 
     /**
